@@ -10,7 +10,7 @@ import java.util.function.Function;
 import static org.assertj.core.api.Assertions.assertThat;
 import static util.LessonResources.applyMyFirstFunction;
 
-public class LessonA_FunctionalInterface {
+public class LessonA_Lambda {
 
     private boolean ___;
     private String _____;
