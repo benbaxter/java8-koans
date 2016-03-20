@@ -1,20 +1,18 @@
+package solutions;
+
 import org.junit.Test;
 import util.LessonResources;
-import util.LessonResources.Food;
-import util.LessonResources.Menu;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static util.LessonResources.createMenuOfMenus;
 import static util.LessonResources.newFoodList;
 
-public class LessonD_Streams {
+public class LessonD_Solutions {
 
     private int ___;
     private double ____;
@@ -36,11 +34,11 @@ public class LessonD_Streams {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         Stream<Integer> stream = list.stream();
 
-        assertThat(list).hasSize(___);
+        assertThat(list).hasSize(5);
         //the count operation will 'iterate' over the stream of data,
         //and count the number of elements it sees
         long count = stream.count();
-        assertThat(count).isEqualTo(___);
+        assertThat(count).isEqualTo(5);
     }
 
     /**
@@ -67,7 +65,7 @@ public class LessonD_Streams {
         //the 'isEven' operation until a 'final' operator is invoked
         Stream<Integer> filteredStream = stream.filter(i -> i % 2 == 0);
 
-        assertThat(filteredStream.count()).isEqualTo(___);
+        assertThat(filteredStream.count()).isEqualTo(2);
     }
 
     /**
@@ -83,18 +81,18 @@ public class LessonD_Streams {
     @Test
     public void _3_filtering() {
 
-        List<Food> foods = Arrays.asList(new Food("pancakes", false, 2.0),
-                                        new Food("buckwheat pancakes", true, 3.0),
-                                        new Food("eggs", true, 1.0),
-                                        new Food("toast", false, 2.0),
-                                        new Food("muffins", false, 3.0));
+        List<LessonResources.Food> foods = Arrays.asList(new LessonResources.Food("pancakes", false, 2.0),
+                new LessonResources.Food("buckwheat pancakes", true, 3.0),
+                new LessonResources.Food("eggs", true, 1.0),
+                new LessonResources.Food("toast", false, 2.0),
+                new LessonResources.Food("muffins", false, 3.0));
 
         double price = foods.stream()
                 .filter(f -> f.glutenFree)
                 .mapToDouble(f -> f.price)
                 .sum();
 
-        assertThat(price).isEqualTo(____);
+        assertThat(price).isEqualTo(4.0);
     }
 
     /**
@@ -121,19 +119,19 @@ public class LessonD_Streams {
     @Test
     public void _4_mapping() {
 
-        List<Food> foods = Arrays.asList(new Food("pancakes", false, 2.0),
-                new Food("buckwheat pancakes", true, 3.0),
-                new Food("eggs", true, 1.0),
-                new Food("toast", false, 2.0),
-                new Food("muffins", false, 3.0));
+        List<LessonResources.Food> foods = Arrays.asList(new LessonResources.Food("pancakes", false, 2.0),
+                new LessonResources.Food("buckwheat pancakes", true, 3.0),
+                new LessonResources.Food("eggs", true, 1.0),
+                new LessonResources.Food("toast", false, 2.0),
+                new LessonResources.Food("muffins", false, 3.0));
 
         List<String> names = foods.stream()
-                .map(Food::getName)
+                .map(LessonResources.Food::getName)
                 .collect(Collectors.toList());
 
         assertThat(names).isNotEmpty();
-        assertThat(names).containsOnlyOnce(_____);
-        assertThat(names).containsOnlyOnce(_____);
+        assertThat(names).containsOnlyOnce("eggs");
+        assertThat(names).containsOnlyOnce("muffins");
     }
 
     /**
@@ -156,19 +154,19 @@ public class LessonD_Streams {
     @Test
     public void _5_collectingToMap() {
 
-        List<Food> foods = Arrays.asList(new Food("pancakes", false, 2.0),
-                new Food("buckwheat pancakes", true, 3.0),
-                new Food("eggs", true, 1.0),
-                new Food("toast", false, 2.0),
-                new Food("muffins", false, 3.0));
+        List<LessonResources.Food> foods = Arrays.asList(new LessonResources.Food("pancakes", false, 2.0),
+                new LessonResources.Food("buckwheat pancakes", true, 3.0),
+                new LessonResources.Food("eggs", true, 1.0),
+                new LessonResources.Food("toast", false, 2.0),
+                new LessonResources.Food("muffins", false, 3.0));
 
-        Map<String, Food> cache = foods.stream()
-                .collect(Collectors.toMap(Food::getName, f -> f));
+        Map<String, LessonResources.Food> cache = foods.stream()
+                .collect(Collectors.toMap(LessonResources.Food::getName, f -> f));
 
         assertThat(cache).isNotEmpty();
-        assertThat(cache.keySet()).hasSize(___);
-        assertThat(cache.keySet()).containsOnlyOnce(_____);
-        assertThat(cache.values()).hasSize(___);
+        assertThat(cache.keySet()).hasSize(5);
+        assertThat(cache.keySet()).containsOnlyOnce("toast");
+        assertThat(cache.values()).hasSize(5);
     }
 
     /**
@@ -188,34 +186,34 @@ public class LessonD_Streams {
     @Test
     public void _6_flatMap() {
 
-        List<Food> breakfast = Arrays.asList(new Food("pancakes", false, 2.0),
-                new Food("buckwheat pancakes", true, 3.0),
-                new Food("eggs", true, 1.0),
-                new Food("toast", false, 2.0),
-                new Food("muffins", false, 3.0));
-        List<Food>  lunch = Arrays.asList(new Food("B.L.T.", false, 4.0),
-                new Food("Chicken Salad", true, 3.0),
-                new Food("Turkey Wrap", true, 5.0));
-        List<Food> dinner = Arrays.asList(new Food("Country Fried Steak", false, 9.0),
-                new Food("Cheese Burger", true, 8.0),
-                new Food("Chicken Parmesan", true, 11.0),
-                new Food("Salmon and Rice", false, 10.0));
+        List<LessonResources.Food> breakfast = Arrays.asList(new LessonResources.Food("pancakes", false, 2.0),
+                new LessonResources.Food("buckwheat pancakes", true, 3.0),
+                new LessonResources.Food("eggs", true, 1.0),
+                new LessonResources.Food("toast", false, 2.0),
+                new LessonResources.Food("muffins", false, 3.0));
+        List<LessonResources.Food>  lunch = Arrays.asList(new LessonResources.Food("B.L.T.", false, 4.0),
+                new LessonResources.Food("Chicken Salad", true, 3.0),
+                new LessonResources.Food("Turkey Wrap", true, 5.0));
+        List<LessonResources.Food> dinner = Arrays.asList(new LessonResources.Food("Country Fried Steak", false, 9.0),
+                new LessonResources.Food("Cheese Burger", true, 8.0),
+                new LessonResources.Food("Chicken Parmesan", true, 11.0),
+                new LessonResources.Food("Salmon and Rice", false, 10.0));
 
         //menu contains breakfast and dinner
-        Menu breakfastSpecialMenu = new Menu(breakfast, newFoodList(), dinner);
+        LessonResources.Menu breakfastSpecialMenu = new LessonResources.Menu(breakfast, newFoodList(), dinner);
         //menu contains breakfast and lunch
-        Menu brunchMenu = new Menu(breakfast, lunch, newFoodList());
+        LessonResources.Menu brunchMenu = new LessonResources.Menu(breakfast, lunch, newFoodList());
         //menu contains lunch and dinner
-        Menu supperMenu = new Menu(newFoodList(), lunch, dinner);
+        LessonResources.Menu supperMenu = new LessonResources.Menu(newFoodList(), lunch, dinner);
 
-        List<Menu> menus = Arrays.asList(breakfastSpecialMenu, brunchMenu, supperMenu);
+        List<LessonResources.Menu> menus = Arrays.asList(breakfastSpecialMenu, brunchMenu, supperMenu);
 
-        List<Food> breakfastFoods = menus.stream()
+        List<LessonResources.Food> breakfastFoods = menus.stream()
                 .flatMap(menu -> menu.getBreakfast().stream())
                 .collect(Collectors.toList());
 
         assertThat(breakfastFoods).isNotEmpty();
-        assertThat(breakfastFoods).hasSize(___);
+        assertThat(breakfastFoods).hasSize(10);
     }
 
     /**
@@ -255,31 +253,36 @@ public class LessonD_Streams {
     @Test
     public void _7_finding() {
 
-        List<Menu> menus = createMenuOfMenus();
+        List<LessonResources.Menu> menus = createMenuOfMenus();
 
         Optional<Double> priceOption = menus.stream()
                 .flatMap(menu -> menu.getBreakfast().stream())
-                .filter(Food::isGlutenFree)
+                .filter(LessonResources.Food::isGlutenFree)
                 .filter(f -> f.getName().contains("pancakes"))
-                .map(Food::getPrice)
+                .map(LessonResources.Food::getPrice)
                 .findFirst();
 
         assertThat(priceOption).isNotNull();
-        assertThat(priceOption.isPresent()).isEqualTo(______);
-        assertThat(priceOption.get()).isEqualTo(____);
+        assertThat(priceOption.isPresent()).isEqualTo(true);
+        assertThat(priceOption.get()).isEqualTo(3.0);
 
         priceOption = menus.stream()
                 .flatMap(menu -> menu.getBreakfast().stream())
-                .filter(Food::isGlutenFree)
+                .filter(LessonResources.Food::isGlutenFree)
                 .filter(f -> f.getName().contains("toast"))
-                .map(Food::getPrice)
+                .map(LessonResources.Food::getPrice)
                 .findFirst();
 
         assertThat(priceOption).isNotNull();
-        assertThat(priceOption.isPresent()).isEqualTo(______);
+        assertThat(priceOption.isPresent()).isEqualTo(false);
         //will this next assertion fail? If so, why? If not,
         // continue to make the test pass
-        assertThat(priceOption.get()).isEqualTo(____);
+        try {
+            assertThat(priceOption.get()).isNotNull();
+            fail("There is no gluten free toast");
+        } catch (NoSuchElementException e) {
+            assertThat(e).hasMessage("No value present");
+        }
     }
 
 }
