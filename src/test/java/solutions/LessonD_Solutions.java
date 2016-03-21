@@ -5,6 +5,7 @@ import util.LessonResources;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -283,6 +284,55 @@ public class LessonD_Solutions {
         } catch (NoSuchElementException e) {
             assertThat(e).hasMessage("No value present");
         }
+    }
+
+    /**
+     * Something to watch out for is the 'normal' behavior of trying to use side
+     * effects to accomplish what you need.
+     *
+     * The simple example of trying to calculate a sum of a list of numbers is a
+     * great example used to teach newbies nuances of any language. Oddly enough,
+     * that same simple example can be used to teach us some gotcha's of java 8's
+     * lambda implementation.
+     *
+     * If we want to sum the numbers from 1 to 10, we would just setup an accumulating
+     * variable and just modify it from inside the scope of our for loop. However,
+     * with lambdas, we still have the same issue we have with anonymous classes and
+     * variables outside of their scope. Variables need to be final in order for the inner
+     * class to have access to them. That has not stopped us before, we would just create
+     * a wrapper class that we would declare final and just modify the wrapper's contents.
+     * With streams and lambdas, we want to avoid side effects and restructure how we think
+     * to approach problems in a functional manner. In this case, we need to figure out how
+     * to apply the appropriate operators on our stream to calculate the sum. (Hint: there
+     * is a sum operator) In practice, you might want to do more complex work and will need
+     * to apply operators like filter and map.
+     *
+     * In this test you will see a class called IntStream. All it does is setup a list of
+     * numbers that we can stream and perform operations on.
+     *
+     */
+    @Test
+    public void _8_bewareTheFakeClosureAllure() {
+
+        //traditional way
+        int sum = 0;
+        for( int i = 0; i <= 10; ++i ) {
+            sum += i;
+        }
+
+        assertThat(sum).isEqualTo(55);
+
+        //this code will not work
+//        Integer badSum = 0;
+//        IntStream.rangeClosed(1, 10)
+//                .forEach(i -> badSum += i);
+
+        //Cannot have access to outside variables.
+        //have to figure out how to do what you want without side effects
+        sum = IntStream.rangeClosed(1, 10)
+                .sum();
+
+        assertThat(sum).isEqualTo(55);
     }
 
 }
