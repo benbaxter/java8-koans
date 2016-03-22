@@ -105,6 +105,7 @@ public class LessonE_DateTime {
         LocalDate springBreakStart = LocalDate.of(2016, Month.MARCH, 12);
         LocalDate springBreakEnd = springBreakStart.plusDays(7);
 
+        assertThat(springBreakStart.getDayOfMonth()).isEqualTo(___);
         assertThat(springBreakEnd.getDayOfMonth()).isEqualTo(___);
     }
 
@@ -127,12 +128,17 @@ public class LessonE_DateTime {
 
     /**
      * Sometimes we want to know how long it has been between two time stamps.
-     * Caching and analytics are two prime candidates who will love this new class
-     * called {@link Duration}. You can create a duration given two dates or times.
+     * Caching and analytics are two prime candidates who will love this new
+     * class called {@link Duration}. You can create a duration given two
+     * dates or times.
      *
-     * When thinking about duration, the focus is on the difference between the two
-     * times. The difference between duration and periods are that periods are points
-     * on a time line where as a duration is the distance between those points.
+     * When thinking about duration, the focus is on the difference between the
+     * two times. The difference between duration and periods are that periods
+     * are points on a time line where as a duration is the distance between
+     * those points. Aka, duration is more for fine grained operations with
+     * hours and seconds whereas periods are more for days and months. Duration
+     * is to time as Period is to date.
+     *Upda
      */
     @Test
     public void _5_duration() {
