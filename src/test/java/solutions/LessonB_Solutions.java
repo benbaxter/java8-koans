@@ -5,39 +5,39 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LessonB_Solutions {
-    private boolean  ___;
-    private int      ____;
-    private String   _____;
-    private Class<?> ______;
 
     /**
      * Now that we have seen some lambdas, let's expand on them.
      *
      * In the past it was common to make an abstract class or a
      * class with static methods that were more like helper methods
-     * but were specific to our subclasses implementation. Now we can
+     * but were specific to our subclass's implementation. Now we can
      * do more with interfaces in java. These tests will expand on how.
      *
-     * There is a new keyword called 'default' that can be used with interfaces.
-     * You can declare full stateless methods in interfaces by using the default
-     * keyword. The #{@link java.util.function.Predicate} class is a great example
-     * of how the default keyword allows more functionality to be built into an
-     * interface. A predicate has one method 'test' which returns a boolean yet
-     * we know how to combine multiple tests to form and, or, and negate operations.
+     * There is a new keyword called "default" that can be used to define full
+     * methods in interfaces. Since you can't define member variables in
+     * interfaces, these default methods must be stateless.
      *
-     * <p>
-     * For this test, use a custom comparator (defined below the test) that can
-     * compare and reverse the comparison when needed.
-     * </p>
+     * The {@link java.util.function.Predicate} class is a great example
+     * of how the default keyword allows more functionality to be built into an
+     * interface. A predicate has one method "test", which returns a boolean.
+     * However, we can combine any number of predicates in standard ways to
+     * form "and", "or", and "negate" operations, no matter how those
+     * individual predicates are implemented.
      */
     @Test
     public void _1_introducingTheDefaultKeyword() {
         String x = "x";
         String y = "y";
-        // Note that lambdas can be variables.
-        // Just like in other functional programming languages,
-        // lambdas can be passed around as function but they are
-        // still classes under the covers
+
+        /*
+         * For this test, use a custom comparator (defined below the test) that
+         * can compare and reverse the comparison when needed.
+         *
+         * Just like in other functional programming languages, lambdas can be
+         * passed around as functions, but they are still classes under the
+         * covers.
+         */
         MyComparator<String> comparator = (a, b) -> a.compareTo(b);
 
         assertThat(comparator.compare(x, y)).isEqualTo(-1);
@@ -54,13 +54,14 @@ public class LessonB_Solutions {
     }
 
     /**
-     * There is a new annotation called #{@link FunctionalInterface}
-     * that is used to document and let java know that your interface
-     * has one abstract method, aka one non-default method.
+     * There is a new annotation called {@link FunctionalInterface}
+     * that is used to let Java know that your interface contains exactly
+     * one abstract method, aka one non-default method. If someone tries to add
+     * an additional method to the interface, the compiler will issue an error.
      *
-     * This is not a real junit test but by uncommenting the @FunctionalInterface
-     * a compilation error will be thrown. Uncomment the annotation and resolve
-     * the compilation error by making 'subtract' become a default method that
+     * This is not a real JUnit test but by uncommenting the @FunctionalInterface
+     * below, a compilation error will be thrown. Uncomment the annotation and
+     * resolve the compilation error by making "subtract" a default method that
      * leverages the add(int n) method.
      *
      * Hint: the key to thinking about default methods is to stay stateless.
@@ -78,7 +79,7 @@ public class LessonB_Solutions {
     /**
      * This might seem really academic and not very useful and you are correct.
      * We are going to have one more academic example but hopefully this will
-     * demonstrate the usefulness. (Hint: its multiple inheritance!)
+     * demonstrate the usefulness. (Hint: it's multiple inheritance!)
      *
      * Building from the MyInteger interface above, we will creating a
      * MyLoggingInteger that formats the implementation for logging.
@@ -97,11 +98,10 @@ public class LessonB_Solutions {
     /**
      * When 'extending' multiple @FunctionalInterfaces, you will lose the
      * lambda-ness ability since you must provide implementations for more
-     * than one non-default method. This should look and feel more familiar
-     * to 'regular' java with the exception that the class will also inherit
-     * extra behavior from the interfaces. In previous versions of java, we
-     * would have to create an abstract class and an interface to accomplish
-     * the same behaviour.
+     * than one non-default method. This should look and feel more familiar,
+     * except that the class will also inherit extra behavior from the
+     * interfaces. In previous versions of Java, we would have to create an
+     * abstract class and an interface to accomplish the same behaviour.
      */
     static class MyAwesomeInteger implements MyInteger, MyLoggingInteger {
         int value;
@@ -133,5 +133,15 @@ public class LessonB_Solutions {
 
         assertThat(i).isInstanceOf(MyInteger.class);
         assertThat(i).isInstanceOf(MyLoggingInteger.class);
+        assertThat(i.subtract(2)).isEqualTo(40);
     }
+
+    /*
+     * Please do not change these variables.  They are required for the tests to
+     * compile with the underscores in them.
+     */
+    private boolean  ___;
+    private int      ____;
+    private String   _____;
+    private Class<?> ______;
 }
