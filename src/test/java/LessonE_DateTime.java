@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.Calendar;
 
@@ -14,8 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * http://www.oracle.com/technetwork/articles/java/jf14-date-time-2125367.html
  */
 public class LessonE_DateTime {
-
-    int ___;
 
     /**
      * java.util.Date and java.util.Calendar have not been replaced
@@ -149,4 +148,31 @@ public class LessonE_DateTime {
         Duration duration = Duration.between(firstVisit, secondVisit);
         assertThat(duration.toHours()).isEqualTo(___);
     }
+
+    /**
+     * One of the most common things that we do with the old Dates is to show
+     * them to people.  Happily, we can format our new date classes in a
+     * similar way.
+     */
+    @Test
+    public void _6_formatting() {
+
+        /**
+         * Notice no "new SimpleDateFormat(pattern)" and this is because we are
+         * using a different class for formatting. We are no longer formatting
+         * dates but rather LocalDateTimes.
+         */
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+
+        LocalDateTime july4th = LocalDateTime.of(2016, Month.JULY, 4, 2, 33); // 7-4-2016 2:33
+
+        assertThat(formatter.format(july4th)).isEqualTo(____);
+    }
+
+    /*
+     * Please do not change these variables.  They are required for the tests to
+     * compile with the underscores in them.
+     */
+    int ___;
+    String ____;
 }

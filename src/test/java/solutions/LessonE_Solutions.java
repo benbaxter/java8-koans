@@ -3,6 +3,7 @@ package solutions;
 import org.junit.Test;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.Calendar;
 
@@ -151,5 +152,25 @@ public class LessonE_Solutions {
 
         Duration duration = Duration.between(firstVisit, secondVisit);
         assertThat(duration.toHours()).isEqualTo(5);
+    }
+
+    /**
+     * One of the most common things that we do with the old Dates is to show
+     * them to people.  Happily, we can format our new date classes in a
+     * similar way.
+     */
+    @Test
+    public void _6_formatting() {
+
+        /**
+         * Notice no "new SimpleDateFormat(pattern)" and this is because we are
+         * using a different class for formatting. We are no longer formatting
+         * dates but rather LocalDateTimes.
+         */
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+
+        LocalDateTime july4th = LocalDateTime.of(2016, Month.JULY, 4, 2, 33); // 7-4-2016 2:33
+
+        assertThat(formatter.format(july4th)).isEqualTo("07/04/2016 02:33");
     }
 }
