@@ -1,3 +1,5 @@
+package solutions;
+
 import org.junit.Test;
 
 import java.time.*;
@@ -13,7 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * For more reference:
  * http://www.oracle.com/technetwork/articles/java/jf14-date-time-2125367.html
  */
-public class LessonE_DateTime {
+public class LessonE_Solutions {
+
 
     int ___;
 
@@ -42,24 +45,24 @@ public class LessonE_DateTime {
         int dayOfYear = cal.get(Calendar.DAY_OF_YEAR);
 
         //hint there are 31 days in January
-        assertThat(dayOfYear).isEqualTo(___);
+        assertThat(dayOfYear).isEqualTo(33);
 
         LocalDate groundHogsDay = LocalDate.of(2016, Month.FEBRUARY, 2);
         dayOfYear = groundHogsDay.get(ChronoField.DAY_OF_YEAR);
-        assertThat(dayOfYear).isEqualTo(___);
+        assertThat(dayOfYear).isEqualTo(33);
 
         cal = Calendar.getInstance();
         cal.set(2016, Calendar.FEBRUARY, 2, 2, 30, 45);
-        assertThat(cal.get(Calendar.HOUR)).isEqualTo(___);
-        assertThat(cal.get(Calendar.MINUTE)).isEqualTo(___);
-        assertThat(cal.get(Calendar.SECOND)).isEqualTo(___);
+        assertThat(cal.get(Calendar.HOUR)).isEqualTo(2);
+        assertThat(cal.get(Calendar.MINUTE)).isEqualTo(30);
+        assertThat(cal.get(Calendar.SECOND)).isEqualTo(45);
 
         //notice that unlike calendar, LocalTime has a well defined api
         //compared to a flag based api
         LocalTime time = LocalTime.of(2, 30, 45);
-        assertThat(time.getHour()).isEqualTo(___);
-        assertThat(time.getMinute()).isEqualTo(___);
-        assertThat(time.getSecond()).isEqualTo(___);
+        assertThat(time.getHour()).isEqualTo(2);
+        assertThat(time.getMinute()).isEqualTo(30);
+        assertThat(time.getSecond()).isEqualTo(45);
     }
 
     /**
@@ -74,19 +77,19 @@ public class LessonE_DateTime {
 
         //this will default to UTC time
         LocalDateTime localTime = LocalDateTime.of(2016, Month.FEBRUARY, 2, 8, 30, 22);
-        assertThat(localTime.getHour()).isEqualTo(___);
+        assertThat(localTime.getHour()).isEqualTo(8);
 
         //This will 'move' the time to New York time, however the time
         //will not really move. It will just keep track of the offset
         ZonedDateTime newYorkTime = localTime.atZone(ZoneId.of("America/New_York"));
-        assertThat(newYorkTime.getHour()).isEqualTo(___);
-        assertThat(newYorkTime.getOffset()).isEqualTo(ZoneOffset.ofHours(___));
+        assertThat(newYorkTime.getHour()).isEqualTo(8);
+        assertThat(newYorkTime.getOffset()).isEqualTo(ZoneOffset.ofHours(-5));
 
         //if we move to Los Angeles, the offset will adjust but the hour of day will
         //remain the same
         ZonedDateTime losAngelesTime = localTime.atZone(ZoneId.of("America/Los_Angeles"));
-        assertThat(losAngelesTime.getHour()).isEqualTo(___);
-        assertThat(losAngelesTime.getOffset()).isEqualTo(ZoneOffset.ofHours(___));
+        assertThat(losAngelesTime.getHour()).isEqualTo(8);
+        assertThat(losAngelesTime.getOffset()).isEqualTo(ZoneOffset.ofHours(-8));
     }
 
     /**
@@ -105,7 +108,7 @@ public class LessonE_DateTime {
         LocalDate springBreakStart = LocalDate.of(2016, Month.MARCH, 12);
         LocalDate springBreakEnd = springBreakStart.plusDays(7);
 
-        assertThat(springBreakEnd.getDayOfMonth()).isEqualTo(___);
+        assertThat(springBreakEnd.getDayOfMonth()).isEqualTo(19);
     }
 
     /**
@@ -122,7 +125,7 @@ public class LessonE_DateTime {
         LocalDate payDay = LocalDate.of(2016, Month.FEBRUARY, 2);
         LocalDate nextPayDay = payDay.plus(payPeriod);
 
-        assertThat(nextPayDay.getDayOfMonth()).isEqualTo(___);
+        assertThat(nextPayDay.getDayOfMonth()).isEqualTo(16);
     }
 
     /**
@@ -141,6 +144,6 @@ public class LessonE_DateTime {
         LocalDateTime secondVisit = LocalDateTime.of(2016, Month.JULY, 4, 7, 33); // 7-4-2016 7:33
 
         Duration duration = Duration.between(firstVisit, secondVisit);
-        assertThat(duration.toHours()).isEqualTo(___);
+        assertThat(duration.toHours()).isEqualTo(5);
     }
 }
