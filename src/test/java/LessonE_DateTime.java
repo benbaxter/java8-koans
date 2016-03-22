@@ -138,7 +138,7 @@ public class LessonE_DateTime {
      * those points. Aka, duration is more for fine grained operations with
      * hours and seconds whereas periods are more for days and months. Duration
      * is to time as Period is to date.
-     *Upda
+     *
      */
     @Test
     public void _5_duration() {
