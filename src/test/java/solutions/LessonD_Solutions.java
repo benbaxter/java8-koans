@@ -15,11 +15,6 @@ import static util.LessonResources.newFoodList;
 
 public class LessonD_Solutions {
 
-    private int ___;
-    private double ____;
-    private String _____;
-    private boolean ______;
-
     /**
      * While the list always has the state of the items it holds,
      * a stream is temporal and performs operations on the 'stream'
@@ -335,4 +330,12 @@ public class LessonD_Solutions {
         assertThat(sum).isEqualTo(55);
     }
 
+    /*
+     * Please do not change these variables.  They are required for the tests to
+     * compile with the underscores in them.
+     */
+    private int ___;
+    private double ____;
+    private String _____;
+    private boolean ______;
 }
