@@ -38,49 +38,62 @@ public class LessonResources {
         }
     }
 
+    public static class Section {
+        String name;
+        List<Food> items;
+
+        public Section(String name, List<Food> items) {
+            this.name = name;
+            this.items = items;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public List<Food> getItems() {
+            return items;
+        }
+    }
+
     public static class Menu {
+        List<Section> sections;
 
-        List<Food> breakfast;
-        List<Food> lunch;
-        List<Food> dinner;
-
-        public Menu(List<Food> breakfast, List<Food> lunch, List<Food> dinner) {
-            this.breakfast = breakfast;
-            this.lunch = lunch;
-            this.dinner = dinner;
+        public Menu(Section... sections) {
+            this.sections = Arrays.asList(sections);
         }
 
-        public List<Food> getBreakfast() {
-            return breakfast;
+        public List<Section> getSections() {
+            return sections;
         }
     }
 
-    public static List<Food> newFoodList(Food... foods) {
-        return Arrays.asList(foods);
-    }
-
-    public static List<Menu> createMenuOfMenus() {
-        List<Food> breakfast = Arrays.asList(new Food("pancakes", false, 2.0),
+    public static Menu createMenu() {
+        List<Food> breakfast = Arrays.asList(
+                new Food("pancakes", false, 2.0),
                 new Food("buckwheat pancakes", true, 3.0),
                 new Food("eggs", true, 1.0),
-                new Food("toast", false, 2.0),
+                new Food("toast", false, 1.0),
                 new Food("muffins", false, 3.0));
-        List<Food>  lunch = Arrays.asList(new Food("B.L.T.", false, 4.0),
+        List<Food> lunch = Arrays.asList(
+                new Food("B.L.T.", false, 4.0),
                 new Food("Chicken Salad", true, 3.0),
                 new Food("Turkey Wrap", true, 5.0));
-        List<Food> dinner = Arrays.asList(new Food("Country Fried Steak", false, 9.0),
+        List<Food> dinner = Arrays.asList(
+                new Food("Country Fried Steak", false, 9.0),
                 new Food("Cheese Burger", true, 8.0),
                 new Food("Chicken Parmesan", true, 11.0),
                 new Food("Salmon and Rice", false, 10.0));
 
-        //menu contains breakfast and dinner
-        Menu breakfastSpecialMenu = new Menu(breakfast, newFoodList(), dinner);
-        //menu contains breakfast and lunch
-        Menu brunchMenu = new Menu(breakfast, lunch, newFoodList());
-        //menu contains lunch and dinner
-        Menu supperMenu = new Menu(newFoodList(), lunch, dinner);
+        /*
+         * Our menu has three sections: breakfast, lunch, and dinner.
+         */
+        Menu menu = new Menu(
+                new Section("Breakfast", breakfast),
+                new Section("Lunch", lunch),
+                new Section("Dinner", dinner));
 
-        return Arrays.asList(breakfastSpecialMenu, brunchMenu, supperMenu);
+        return menu;
     }
 
 }
