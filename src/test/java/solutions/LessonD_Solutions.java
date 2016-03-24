@@ -136,7 +136,7 @@ public class LessonD_Solutions {
                 .mapToDouble(Food::getPrice) // returns a DoubleStream, which has a sum() method
                 .sum(); // sum() consumes the stream
 
-        assertThat(price).isEqualTo(4.0);
+        assertThat(price).isCloseTo(4.0, offset(.0001));
     }
 
     /**
@@ -221,7 +221,7 @@ public class LessonD_Solutions {
 
         assertThat(cache).isNotEmpty();
         assertThat(cache.keySet()).hasSize(5);
-        assertThat(cache.get("eggs").getPrice()).isEqualTo(1.0);
+        assertThat(cache.get("eggs").getPrice()).isCloseTo(1.0, offset(.00001));
     }
 
     /**

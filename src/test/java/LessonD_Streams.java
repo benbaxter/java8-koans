@@ -133,7 +133,7 @@ public class LessonD_Streams {
                 .mapToDouble(f -> f.price) // returns a DoubleStream, which has a sum() method
                 .sum(); // sum() consumes the stream
 
-        assertThat(price).isEqualTo(____);
+        assertThat(price).isCloseTo(____, offset(.0001));
     }
 
     /**
@@ -218,7 +218,7 @@ public class LessonD_Streams {
 
         assertThat(cache).isNotEmpty();
         assertThat(cache.keySet()).hasSize(___);
-        assertThat(cache.get("eggs").getPrice()).isEqualTo(____);
+        assertThat(cache.get("eggs").getPrice()).isCloseTo(____, offset(.00001));
     }
 
     /**
