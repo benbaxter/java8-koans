@@ -77,7 +77,7 @@ public class LessonB_FunctionalInterface {
      * We are going to have one more academic example but hopefully this will
      * demonstrate the usefulness. (Hint: it's multiple inheritance!)
      *
-     * Building from the MyInteger interface above, we will creating a
+     * Building from the MyInteger interface above, we will create a
      * MyLoggingInteger that formats the implementation for logging.
      *
      * By implementing both interfaces, we will get some functionality
